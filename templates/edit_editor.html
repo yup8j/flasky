@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Edit
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-title">
+                    {% if nav == 'fault' %}
+                    <h3>Wrong Input</h3>
+                    {% else %}
+                    <h4>Edit Editor</h4>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="basic-form">
+                        <form method="post" action="/edit-editor?editor_id={{ editor[0] }}">
+                            <div class="form-group">
+                                <p class="text-muted m-b-15 f-s-12">Editor Name</p>
+                                <input name="editor_name" type="text" value="{{ editor[1] }}"
+                                       class="form-control input-default" required="required">
+                            </div>
+                            <div class="form-group">
+                                <p class="text-muted m-b-15 f-s-12">Title</p>
+                                <input name="editor_title" type="text" value="{{ editor[2] }}"
+                                       class="form-control input-default"
+                                       required="required">
+                            </div>
+                            <div class="form-group">
+                                <p class="text-muted m-b-15 f-s-12">Publisher ID</p>
+                                <input name="p_id" type="text" value="{{ editor[3] }}"
+                                       class="form-control input-default"
+                                       required="required">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

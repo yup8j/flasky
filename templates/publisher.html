@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Publisher
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+    <div class="col-lg-6" style="margin-bottom: 20px;">
+        <a href="/create-publisher" class="btn btn-primary btn-block">Add New Publisher</a>
+    </div>
+</div>
+{% for publisher in publishers %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-title">
+                <h4>{{ publisher[1] }}</h4>
+            </div>
+            <p class="text-muted ">
+               <text>Location:</text> {{ publisher[2] }}
+            </p>
+            <p class="text-muted ">
+               <text>Publisher ID:</text>  {{ publisher[0] }}
+            </p>
+            <div class="button-list">
+                <div class="btn-group">
+                    <a href="/edit-publisher?publisher_id={{ publisher[0] }}" class="btn btn-primary">Edit</a>
+                    <a href="/delete-publisher?publisher_id={{ publisher[0] }}" onclick="return confirm('delete?')" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
