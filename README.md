@@ -9,3 +9,4 @@ flask_sqlalchemy==2.3.2
 
 ## Database
 
+Create a new database 

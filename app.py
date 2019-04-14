@@ -316,16 +316,6 @@ def publish_details():
         return render_template('bookpubdetails.html', error='error')
 
 
-@app.route('/publisher')
-def publisher_list():
-    cursor = db.cursor()
-    sql = "SELECT * FROM publisher;"
-    cursor.execute(sql)
-    db.commit()
-    publishers = cursor.fetchall()
-    return render_template('publisher.html', nav='publisher', publishers=publishers)
-
-
 @app.route('/detail-of-books')
 def detail_of_books_list():
     cursor = db.cursor()
@@ -346,144 +336,14 @@ def collction_of_books_list():
     return render_template('collectionofbooks.html', nav='book-collections', collections=answer)
 
 
-@app.route('/delete-editor')
-def delete_editor():
-    editor_id = request.args.get('editor_id')
-    sql = "DELETE FROM editor WHERE editor.editor_id = %s ;" % (editor_id)
-    try:
-        cursor = db.cursor()
-        cursor.execute(sql)
-        db.commit()
-    except:
-        db.rollback()
-    return redirect('/editor')
 
 
-@app.route('/library')
-def library_list():
-    cursor = db.cursor()
-    sql = "SELECT * FROM library;"
-    cursor.execute(sql)
-    db.commit()
-    librarys = cursor.fetchall()
-    return render_template('library.html', nav='library', librarys=librarys)
 
 
-@app.route('/edit-library', methods=['GET', 'POST'])
-def edit_library():
-    library_old_id = request.args.get('library_id')
-    sql = "SELECT * FROM library WHERE library.lib_id = %s ;" % (library_old_id)
-    cursor = db.cursor()
-    cursor.execute(sql)
-    library = cursor.fetchone()
-
-    if request.method == 'POST':
-        # library_id = request.form.get('library_id')
-        library_name = request.form.get('library_name')
-        library_address = request.form.get('library_address')
-        library_email = request.form.get('library_email')
-        sql = "UPDATE library SET lib_name = '%s', lib_address= '%s', lib_email= '%s'WHERE lib_id = '%s' ;" % (
-            library_name, library_address, library_email, library_old_id)
-        print("sql {}".format(sql))
-        try:
-            cursor = db.cursor()
-            cursor.execute(sql)
-            db.commit()
-        except:
-            db.rollback()
-        return redirect('/library')
-    return render_template('edit_library.html', library=library)
 
 
-@app.route('/delete-library')
-def delete_library():
-    library_id = request.args.get('library_id')
-    sql = "DELETE FROM library WHERE library.lib_id = %s ;" % (library_id)
-    try:
-        cursor = db.cursor()
-        cursor.execute(sql)
-        db.commit()
-    except:
-        db.rollback()
-    return redirect('/library')
 
 
-@app.route('/edit-staff', methods=['GET', 'POST'])
-def edit_staff():
-    staff_old_id = request.args.get('staff_id')
-    sql = "SELECT * FROM staff WHERE staff.staff_id = %s ;" % (staff_old_id)
-    cursor = db.cursor()
-    cursor.execute(sql)
-    staff = cursor.fetchone()
-    if request.method == 'POST':
-        staff_id = request.form.get('staff_id')
-        staff_name = request.form.get('staff_name')
-        staff_title = request.form.get('staff_title')
-        staff_phone = request.form.get('staff_phone')
-        l_id = request.form.get('l_id')
-        sql = "UPDATE staff SET staff_name = '%s', staff_title= '%s', l_id= '%s', staff_phone='%s' WHERE staff_id = '%s' ;" % (
-            staff_name, staff_title, l_id, staff_phone, staff_old_id)
-        try:
-            cursor = db.cursor()
-            cursor.execute(sql)
-            db.commit()
-        except:
-            db.rollback()
-        return redirect('/staff')
-    return render_template('edit_staff.html', staff=staff, nav='staff')
-
-
-@app.route('/delete-staff')
-def delete_staff():
-    staff_id = request.args.get('staff_id')
-    sql = "DELETE FROM staff WHERE staff.staff_id = %s ;" % (staff_id)
-    try:
-        cursor = db.cursor()
-        cursor.execute(sql)
-        db.commit()
-    except:
-        db.rollback()
-    return redirect('/staff')
-
-
-@app.route('/edit-author', methods=['GET', 'POST'])
-def edit_author():
-    author_old_id = request.args.get('author_id')
-    sql = "SELECT * FROM author WHERE author.author_id = %s ;" % (author_old_id)
-    cursor = db.cursor()
-    cursor.execute(sql)
-    db.commit()
-    author = cursor.fetchone()
-    if request.method == 'POST':
-        author_id = request.form.get('author_id')
-        author_name = request.form.get('author_name')
-        author_birthday = request.form.get('author_birthday')
-        author_nationality = request.form.get('author_nationality')
-        author_email = request.form.get('author_email')
-        sql = "UPDATE author SET author_name = '%s', author_birthday= '%s', author_nationality= '%s',author_email='%s' WHERE author_id = '%s' ;" % (
-            author_name, author_birthday, author_nationality, author_email, author_old_id)
-        print("sql {}".format(sql))
-        try:
-            cursor = db.cursor()
-            cursor.execute(sql)
-            db.commit()
-        except:
-            db.rollback()
-        return redirect('/author')
-    return render_template('edit_author.html', author=author, nav='author')
-
-
-@app.route('/delete-author')
-def delete_author():
-    author_id = request.args.get('author_id')
-    sql = "DELETE FROM author WHERE author.author_id = %s ;" % (author_id)
-    try:
-        cursor = db.cursor()
-        cursor.execute(sql)
-        db.commit()
-    except:
-        db.rollback()
-    return redirect('/author')
 
 
 @app.route('/reader')
