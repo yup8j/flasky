@@ -22,7 +22,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hard to guess string'
 admin = Admin(app, name=u'MIS', template_mode='bootstrap3')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:mysql@localhost:3306/e3_1'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:ABcd1121@localhost:3306/e3_1'
 db_session = SQLAlchemy(app)
 
 
