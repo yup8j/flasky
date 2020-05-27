@@ -5,4 +5,4 @@ from sqlalchemy.ext.declarative import declarative_base
 import os
 import pymysql
 
-db = pymysql.connect(host='localhost', user='root', password='ABcd1121', database='e3_1')
+db = pymysql.connect(host='localhost', user='root', password='sjhdb1997', database='e3_1')
